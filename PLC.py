@@ -1,30 +1,30 @@
-class PLC:
-   """ Planetary parameters in SI units  """     
+class plc:
+   """ planetary parameters in SI units  """     
    #def __init__(self,body,version='Tosi2013',debug=0):
    def __init__(self,body='Mercury',debug=2):
       import numpy as np
       import sys
       from GV import GV
       gc = GV()
-      # PLANET-DEPENDENT PARAMETERS
+      # plANET-DEPENDENT PARAMETERS
       if body=='Mercury':#&&=
-            # Linear [m]
-            self.Rpl   = 2.439e6 # Planetary radius [Perry et al 2015]
-            self.Rcore = 2.02e6 # Core radius [Hauck et al 2013]
-            self.Cr    = 35.e3  # Crustal thickness [Padovan et al 2015]
-            # Mass [kg]
-            self.Mass = 3.3e23  # [Smith et al. 2012] 
-            # Densities [kg/m3] from Hauck et al. (2013)
-            self.dOS = 3380. # OS: Outer Shell
-            self.dCo = 6980. # Co: Core
-            # Temperatures [K]
-            self.TS  = 440.   # Surface 
-            self.Tcmb = 1900. # CMB 
-            # Maximum melting pressure (above which, ie deeper, melt
-            # will not raise).
-            self.MaxMeltP = 100.e9 # GPa (i.e., melt buoyant in the entire mantle)
-            # Orbital data
-            self.ecc  = 0.2056  # eccentricity [1]
+         # Linear [m]
+         self.Rpl   = 2.439e6 # Planetary radius [Perry et al 2015]
+         self.Rcore = 2.02e6 # Core radius [Hauck et al 2013]
+         self.Cr    = 35.e3  # Crustal thickness [Padovan et al 2015]
+         # Mass [kg]
+         self.Mass = 3.3e23  # [Smith et al. 2012] 
+         # Densities [kg/m3] from Hauck et al. (2013)
+         self.dOS = 3380. # OS: Outer Shell
+         self.dCo = 6980. # Co: Core
+         # Temperatures [K]
+         self.TS  = 440.   # Surface 
+         self.Tcmb = 1900. # CMB 
+         # Maximum melting pressure (above which, ie deeper, melt
+         # will not raise).
+         self.MaxMeltP = 100.e9 # GPa (i.e., melt buoyant in the entire mantle)
+         # Orbital data
+         self.ecc  = 0.2056  # eccentricity [1]
          self.a    = 57.91e9 # semimajor axis [m] (Mercury fact sheet)
          self.Msun = 1.9885e30 # mass of the Sun [kg] (Sun fact sheet) 
          # Derive orbital period
@@ -102,19 +102,6 @@ class PLC:
          # mantle's k is obtained from Ka,dOS, and Cp. Regolith/crust might have lower
          # conductivity, so and independent value can be set here.
          self.kc  = 3.3 # [W/m/K] thermal conductivity regolith/crust
-      elif version=='Tosi2013':
-         self.Cp  = 1200.  # Table 2
-         self.Ka  = 9.523809523809523e-7  # Reverse engineered to obain km=4
-         #self.Ka  = 7.142857142857143e-07 # Reverse engineered to obain km=3
-         # Rheological parameters (Tref,Dref,and etaref should be consistent)
-         #self.etaref = 4.46e21 # Pa s # Tosi's (2013) refernce value for 2D simulations
-         self.etaref = 1e21 # 
-         self.TrefKa = 1600    # K 
-         self.PrefPa = 3e9     # Pa
-         self.alfa   = 2.e-5 # 1/K
-         # mantle's k is obtained from Ka,dOS, and Cp. Crust might have lower
-         # conductivity, so and independent value can be set here.
-         self.kc  = 3.3 # [W/m/K] thermal conductivity crust
       elif version=='Mars':
          self.Cp  = 1200. # P15, Table 3 
          self.Ka  = 1e-6  # P15, Table 3
