@@ -3,6 +3,7 @@
  The project also contain some useful physical constants and factors.
  
 FORMAT
+ 
  Ideally, every entry should have the following format:
  
  G = 6.67408e-11 # Gravitational constant [m3/kg/s2] (Mohr et al., 2016).
