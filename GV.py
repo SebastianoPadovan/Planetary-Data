@@ -1,5 +1,5 @@
 class GV:
-   """ Collection of constants 
+   """ Collection of constants [SI units]
        and useful quantities """
    def __init__(self):
       import numpy as np
