@@ -1,14 +1,13 @@
 class PLC:
    """ Planetary parameters in SI units  """     
    #def __init__(self,body,version='Tosi2013',debug=0):
-   def __init__(self,body='Mercury',version='up2date',debug=2):
+   def __init__(self,body='Mercury',debug=2):
       import numpy as np
       import sys
       from GV import GV
       gc = GV()
       # PLANET-DEPENDENT PARAMETERS
       if body=='Mercury':#&&=
-         if version=='up2date':#&&=
             # Linear [m]
             self.Rpl   = 2.439e6 # Planetary radius [Perry et al 2015]
             self.Rcore = 2.02e6 # Core radius [Hauck et al 2013]
@@ -26,43 +25,10 @@ class PLC:
             self.MaxMeltP = 100.e9 # GPa (i.e., melt buoyant in the entire mantle)
             # Orbital data
             self.ecc  = 0.2056  # eccentricity [1]
-            self.a    = 57.91e9 # semimajor axis [m] (Mercury fact sheet)
-            self.Msun = 1.9885e30 # mass of the Sun [kg] (Sun fact sheet) 
-            # Derive orbital period
-            self.n    = ((gc.G*self.Msun)/self.a**3.)**(1./2.) #[1/s]
-            # Factor for the Calculation of the total tidal dissipation
-            self.Edotf= 21./2. # This corresponds to a SOR 1:1.Segatz et al. (1988)
-                               # It might be different for Mercury.
-            self.Rtidal=2.2e6  # Top of the tidal dissipating region#=&&
-         elif version=='Tosi2013':#&&=
-            # Linear [m]
-            self.Rpl   = 2.440e6 # Table 2 
-            self.Rcore = 2.040e6 # Table 2
-            self.Cr    = 35.e3  # Crustal thickness [Padovan et al 2015]
-            # Mass [kg]
-            self.Mass = 3.3e23  # [Smith et al. 2012] 
-            # Densities [kg/m3] from Hauck et al. (2013)
-            self.dOS = 3500. # Table 2
-            self.dCo = 7200. # Table 2
-            # Temperatures [K]
-            self.TS  = 440.   # Table 2
-            self.Tcmb = 1890. # Table 2
-            # Maximum melting pressure (above which, ie deeper, melt
-            # will not raise).
-            self.MaxMeltP = 100.e9 # Pa (i.e., melt buoyant in the entire mantle)
-            # Orbital data
-            self.ecc  = 0.2056  # eccentricity [1]
-            self.a    = 57.91e9 # semimajor axis [m] (Mercury fact sheet)
-            self.Msun = 1.9885e30 # mass of the Sun [kg] (Sun fact sheet) 
-            # Derive orbital period
-            self.n    = ((gc.G*self.Msun)/self.a**3.)**(1./2.) #[1/s]
-            # Factor for the Calculation of the total tidal dissipation
-            self.Edotf= 21./2. # This corresponds to a SOR 1:1.Segatz et al. (1988)
-                               # It might be different for Mercury.
-            self.Rtidal=2.2e6  # Top of the tidal dissipating region#=&&
-         if(self.Rtidal<=self.Rcore):
-            print ("Rtidal cannot be <= Rcore")
-            sys.exit()#=&&
+         self.a    = 57.91e9 # semimajor axis [m] (Mercury fact sheet)
+         self.Msun = 1.9885e30 # mass of the Sun [kg] (Sun fact sheet) 
+         # Derive orbital period
+         self.n    = ((gc.G*self.Msun)/self.a**3.)**(1./2.) #[1/s]#=&&
       elif body=='Moon':#&&=
          # Linear [m]
          self.Rpl   = 1.74e6  # Planetary radius [GAIA spreadsheet]
@@ -71,7 +37,7 @@ class PLC:
          self.Cr    = 40.e3  # Crustal thickness [Laneuville et al 2013]
          # Mass [kg]
          self.Mass = 7.346e22 # [Smith et al. 2012] 
-         # Densities [kg/m3] from Hauck et al. (2013)
+         # Densities [kg/m3]
          self.dOS = 3300. # OS: Outer Shell [Moon Fact sheet]
          self.dCo = 7000. # Co: Core
          # Temperatures [K]
@@ -85,15 +51,7 @@ class PLC:
          self.a      = 3.844e8   # semimajor axis [m] (Moon fact sheet)
          self.MEarth = 5.97e24 # mass of the Sun [kg] (Moon fact sheet) 
          # Derive orbital period
-         self.n    = ((gc.G*self.MEarth)/self.a**3.)**(1./2.) #[1/s]
-         # Factor for the Calculation of the total tidal dissipation
-         self.Edotf= 21./2.  # This corresponds to a SOR 1:1.Segatz et al. (1988)
-                             # It might be different for Mercury.
-         self.Rtidal=1.065e6 # Top of the tidal dissipating region
-         if(self.Rtidal<=self.Rcore):
-            print ("Rtidal cannot be <= Rcore")
-            sys.exit()
-         # Internal heating#=&&
+         self.n    = ((gc.G*self.MEarth)/self.a**3.)**(1./2.) #[1/s]#=&&
       elif body=='Mars':#&&=
          # Sources: MaFS [Mars Fact Sheet], R11 [Rivoldini et al, 2011]
          #          N04 [Neumann et al., 2004] WZ04 [Wieczorek & Zuber, 2004]
@@ -122,10 +80,6 @@ class PLC:
          self.Msun   = 1.9885e30 # mass of the Sun [kg] (Sun fact sheet) 
          # Derive orbital period
          self.n    = ((gc.G*self.Msun)/self.a**3.)**(1./2.) #[1/s] #=&&
-         # Factor for the Calculation of the total tidal dissipation
-         self.Edotf= 21./2. # This corresponds to a SOR 1:1.Segatz et al. (1988)
-                            # It might be different for Mars.
-         self.Rtidal=2.2e6  # Top of the tidal dissipating region#=&&
       else:
          print ("Planet unknown or its")
          print ("data are not available")
