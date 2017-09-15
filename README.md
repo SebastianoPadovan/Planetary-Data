@@ -1,5 +1,5 @@
 # Planetary-Data
- A python dictionary/class with referenced and self-consistent planetary data.
+ A python class with referenced and self-consistent planetary data.
  The project also contain some useful physical constants and factors.
  
 FORMAT
