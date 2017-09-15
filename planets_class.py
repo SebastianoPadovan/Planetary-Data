@@ -116,9 +116,9 @@ class plc:
          self.dmt    = 4e3       # [PREM]
          self.dcore  = 11e3      # [PREM]
          self.moif   = 0.3308    # [Earth fact sheet]
-         self.TS     = 250.      # 
-         self.Tcmb   = 3000.     # [SSS]
-         self.meltP  = 3.e9      # [SSS]
+         self.TS     = 293.      # 
+         self.Tcmb   = 4000.     # [SSS]
+         self.meltP  = 8.e9      # [SSS]
          # Orbital p arameters 
          self.ecc  =  0.0167   # [Earth fact sheet]
          self.sma  = 1.496e11  # [Earth fact sheet]
